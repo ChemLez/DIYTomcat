@@ -1,0 +1,66 @@
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Context <init>
+INFO : Deploying web application directory /Users/liz/Code/diyTomcat5_12/webapps/j2ee
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Context <init>
+INFO : Deployment of web application directory /Users/liz/Code/diyTomcat5_12/webapps/j2ee has finished in 131 ms
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Context <init>
+INFO : Deploying web application directory /Users/liz/Code/diyTomcat5_12/webapps/a
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Context <init>
+INFO : Deployment of web application directory /Users/liz/Code/diyTomcat5_12/webapps/a has finished in 2 ms
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Context <init>
+INFO : Deploying web application directory /Users/liz/Code/diyTomcat5_12/webapps/ROOT
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Context <init>
+INFO : Deployment of web application directory /Users/liz/Code/diyTomcat5_12/webapps/ROOT has finished in 1 ms
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Context <init>
+INFO : Deploying web application directory /Users/liz/Code/diyTomcat5_12/webapps/c
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Context <init>
+INFO : Deployment of web application directory /Users/liz/Code/diyTomcat5_12/webapps/c has finished in 3 ms
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Context <init>
+INFO : Deploying web application directory /Users/liz/Code/diyTomcat5_12/webapps/javaweb0
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Context <init>
+INFO : Deployment of web application directory /Users/liz/Code/diyTomcat5_12/webapps/javaweb0 has finished in 63 ms
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Context <init>
+INFO : Deploying web application directory /Users/liz/Code/diyTomcat5_12/webapps/b
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Context <init>
+INFO : Deployment of web application directory /Users/liz/Code/diyTomcat5_12/webapps/b has finished in 2 ms
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Context <init>
+INFO : Deploying web application directory /Users/liz/Code/diyTomcat5_12/b
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Context <init>
+INFO : Deployment of web application directory /Users/liz/Code/diyTomcat5_12/b has finished in 1 ms
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Context <init>
+INFO : Deploying web application directory /Users/liz/Code/diytomcatJavaWeb/web/
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Context <init>
+INFO : Deployment of web application directory /Users/liz/Code/diytomcatJavaWeb/web/ has finished in 18 ms
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Server logJVM
+INFO : Server version:		Chemlez Diy Tomcat/1.0.1
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Server logJVM
+INFO : Server built:		2020-5-12 15:13:30
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Server logJVM
+INFO : Server number:		1.0.1
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Server logJVM
+INFO : OS Name	:		Mac OS X
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Server logJVM
+INFO : OS Version:		10.16
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Server logJVM
+INFO : Architecture:		x86_64
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Server logJVM
+INFO : Java Home:		/Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home/jre
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Server logJVM
+INFO : JVM Version:		1.8.0_202-b08
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Server logJVM
+INFO : JVM Vendor:		Oracle Corporation
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Connector init
+INFO : Initializing ProtocolHandler [http-bio-18080]
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Connector init
+INFO : Initializing ProtocolHandler [http-bio-18081]
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Connector init
+INFO : Initializing ProtocolHandler [http-bio-18082]
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Service init
+INFO : Initialization processed in 1 ms
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Connector start
+INFO : Starting ProtocolHandler [http-bio-18080]
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Connector start
+INFO : Starting ProtocolHandler [http-bio-18081]
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Connector start
+INFO : Starting ProtocolHandler [http-bio-18082]
+07 04, 2021 21:20:14 下午 cn.lizhi.diyTomcat.catalina.Server start
+INFO : Server start up in 4 ms
