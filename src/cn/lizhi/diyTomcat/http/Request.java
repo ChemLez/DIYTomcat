@@ -123,12 +123,15 @@ public class Request extends BaseRequest {
         if (cookies == null) {
             return null;
         }
+        String res = null;
         for (Cookie cookie : cookies) {
             if ("JSESSIONID".equals(cookie.getName())) { // 获取到存在sessionId的cookie，目的是用这个id去匹配服务端的session
-                return cookie.getValue();
+//                return cookie.getValue();
+                System.out.println(cookie.getName()+"："+cookie.getValue());
+                res = cookie.getValue();
             }
         }
-        return null;
+        return res;
     }
 
     private void parseMethod() {

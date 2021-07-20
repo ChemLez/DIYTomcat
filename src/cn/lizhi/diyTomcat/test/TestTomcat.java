@@ -6,6 +6,7 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.NetUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.ZipUtil;
+import cn.lizhi.diyTomcat.Thread.ThreadPool;
 import cn.lizhi.diyTomcat.util.MiniBrowser;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -69,15 +70,19 @@ public class TestTomcat {
          * 客户端线程池 - 用于模仿多个用户同时请求。即：多个客户端同时访问 timeConsume.html
          */
         // 线程池的定义 - 设定线程池,模仿3个同时访问 timeConsume.html 核心线程池大小20，最大线程池大小20 线程最大空闲时间 60，时间单位-Second,线程等待队列
-        ThreadPoolExecutor threadPool = new ThreadPoolExecutor(20, 20, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(10));
+//        ThreadPoolExecutor threadPool = new ThreadPoolExecutor(20, 20, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(10));
+        ThreadPool threadPool = new ThreadPool(100, 60, TimeUnit.SECONDS, 10, (blockingQueue, task) -> {
+            // 自己去执行这个任务
+            new Thread(task).start();
+        });
 
         TimeInterval timeInterval = DateUtil.timer(); // 开始计时
 
         for (int i = 0; i < 3; i++) {
             threadPool.execute(() -> getContentString("/timeConsume.html")); // 从线程池中获取3个线程，执行任务 这里的线程池，是用来模拟客户端的多个请求同时发出
         }
-        threadPool.shutdown(); // shutdown 尝试关闭线程池，但是如果 线程池里有任务在运行，就不会强制关闭，直到任务都结束了，才关闭.
-        threadPool.awaitTermination(1, TimeUnit.HOURS); // 会给线程池1个小时的时间去执行，如果超过1个小时了也会返回，如果在一个小时内任务结束了，就会马上返回。
+//        threadPool.shutdown(); // shutdown 尝试关闭线程池，但是如果 线程池里有任务在运行，就不会强制关闭，直到任务都结束了，才关闭.
+//        threadPool.awaitTermination(1, TimeUnit.HOURS); // 会给线程池1个小时的时间去执行，如果超过1个小时了也会返回，如果在一个小时内任务结束了，就会马上返回。
 
         long duration = timeInterval.intervalMs(); // 结束计时
 
@@ -220,42 +225,42 @@ public class TestTomcat {
     }
 
     @Test
-    public void testClientJump(){
+    public void testClientJump() {
         String http_servlet = getHttpString("/java/jump1"); // 测试invokerServlet
         System.out.println(http_servlet);
         System.out.println("=====");
-        containAssert(http_servlet,"HTTP/1.1 302 Found");
+        containAssert(http_servlet, "HTTP/1.1 302 Found");
         String http_jsp = getHttpString("/java/jump1.jsp"); // 测试JspServlet
         System.out.println(http_jsp);
-        containAssert(http_jsp,"HTTP/1.1 302 Found");
+        containAssert(http_jsp, "HTTP/1.1 302 Found");
     }
 
     /**
      * 服务器内部资源跳转
      */
     @Test
-    public void testServerJump(){
+    public void testServerJump() {
         String http_servlet = getHttpString("/java/jump2");
         System.out.println(http_servlet);
-        containAssert(http_servlet,"Hello DIY Tomcat from HelloServlet");
+        containAssert(http_servlet, "Hello DIY Tomcat from HelloServlet");
     }
 
     /**
      * 带参数的服务器内部跳转
      */
     @Test
-    public void testServerJumpWithAttributes(){
+    public void testServerJumpWithAttributes() {
         String http_servlet = getHttpString("/java/jump2");
-        containAssert(http_servlet,"Hello DIY Tomcat from HelloServlet@javaweb, the name is gareen");
+        containAssert(http_servlet, "Hello DIY Tomcat from HelloServlet@javaweb, the name is gareen");
     }
 
     /**
      * jar文件测试
      */
-    @Test
+//    @Test
     public void testJavaweb0Hello() {
         String html = getContentString("/javaweb0/hello");
-        containAssert(html,"Hello DIY Tomcat from HelloServlet@javaweb");
+        containAssert(html, "Hello DIY Tomcat from HelloServlet@javaweb");
     }
 
     private byte[] getContentByte(String uri, boolean gzip) {

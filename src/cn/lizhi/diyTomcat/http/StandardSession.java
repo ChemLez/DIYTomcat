@@ -17,7 +17,7 @@ public class StandardSession implements HttpSession {
     private String id; // 当前session的唯一id
     private long creationTime; // 创建时间 单位 ms
     private long lastAccessedTime; // 最后一次访问时间 单位 ms
-    private ServletContext servletContext; // servletContext；ServletContext对象可以被web应用程序中的所有Servlet访问，可以解决不同用户之间的数据共享
+    private ServletContext servletContext; // servletContext；ServletContext对象可以被web应用程序中的所有Servlet访问，可以解决不同用户之间的数据共享 - context
     private int maxInactiveInterval; // 最大持续时间分钟数  lastAccessedTime 用于对 session 自动失效。 一般默认是30分钟，如果不登录， session 就会自动失效了。
 
     public StandardSession(String jsessionid, ServletContext servletContext) {

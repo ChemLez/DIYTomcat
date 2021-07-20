@@ -57,12 +57,12 @@ public class Context {
 
     private WebappClassLoader webappClassLoader; //  一个web应用对应一个自己独立的WebappClassLoader。
     private ContextFileChangeWatcher contextFileChangeWatcher; // 该context对应的监听器
-    private ServletContext servletContext; // 该context对应的servlet容器 代表整个应用
+    private ServletContext servletContext; // 该context对应的servlet容器 代表整个应用 context和servletContext关联
     private Map<Class<?>, HttpServlet> servletPool; // 存放servlet的池子
     private List<String> loadOnStartupServletClassNames; // 用于存放哪些类需要做自启动
     private Map<String, Filter> filterPool; // 存放filterPool的池子
 
-    private List<ServletContextListener> listeners;
+    private List<ServletContextListener> listeners; // 监听器集合 - 监听Context的生命周期
 
 
     public Context(String path, String docBase, Host host, boolean reloadable) {
@@ -93,7 +93,6 @@ public class Context {
 
         ClassLoader commonClassLoader = Thread.currentThread().getContextClassLoader(); // Thread.currentThread().getContextClassLoader() 就可以获取到 Bootstrap 里通过 Thread.currentThread().setContextClassLoader(commonClassLoader); 设置的 commonClassLoader.只有主线程进行了设置
         this.webappClassLoader = new WebappClassLoader(docBase, commonClassLoader); // 该context对应的WebappClassLoader 这样WebappClassLoader 是在 commonClassLoader层级之下的
-
         this.listeners = new ArrayList<>();
 
         LogFactory.get().info("Deploying web application directory {}", this.docBase);
@@ -404,7 +403,7 @@ public class Context {
     }
 
     /**
-     * 从web.xml重扫描监听的类 加载listener到list集合中
+     * 从web.xml重新扫描监听的类 加载listener到list集合中
      */
     private void loadListeners() {
         try {
@@ -486,42 +485,37 @@ public class Context {
      * 无重复，接着进行web.xml的解析
      */
     private void init() {
-        fireEvent("init");
-        if (!contextWebXmlFile.exists()) { // 该文件不存在
+        if (!contextWebXmlFile.exists()) { // 该文件不存在 - web文件不存在
             return;
         }
-
         try {
             checkDuplicated(); // 检查是否存在重复
         } catch (WebConfigDuplicatedException e) {
             e.printStackTrace();
             return;
         }
-
-        String xml = FileUtil.readUtf8String(contextWebXmlFile); // 读取xml文件
-        Document d = Jsoup.parse(xml); // 解析xml文件对象
-        parseServletMapping(d); // 以上不存在重复，再进行xml的具体解析
-        parseServletInitParams(d); // 参数初始化
-        parseFilterMapping(d);
-        parseFilterInitParams(d);
-        initFilter(); // 创建filter
-
-        // 加载需要自启动的类 -- 初始化context时，就将满足自启动的servlet类进行创建、加载；其他的都是用到的时候再加载- 懒加载
-        parseLoadOnStartup(d); // 解析出需要自启动的类
-        handleLoadOnStartup(); // 创建出相应的自启动的servlet
+        String xml = FileUtil.readUtf8String(contextWebXmlFile);
+        Document d = Jsoup.parse(xml); // 解析 填充容器
+        parseServletMapping(d); // servlet的映射关系解析
+        parseServletInitParams(d); // 该servlet对应的初始化参数解析
+        parseLoadOnStartup(d); // 获取自启动的servlet
+        handleLoadOnStartup(); // 加载自启动的servlet
+        parseFilterMapping(d); // 解析filter
+        parseFilterInitParams(d); // filter参数解析
+        initFilter(); // 初始化Filter
+        loadListeners(); // 加载监听器 - Listener
+        fireEvent("init");
     }
 
     /**
      * 加载初始化方法 并打印日志
      */
     private void deploy() {
-        loadListeners();
         init();
         if (reloadable) { // 支持重加载 - 对该context进行监听
             this.contextFileChangeWatcher = new ContextFileChangeWatcher(this);
             contextFileChangeWatcher.start();
         }
-
         // 进行了JspRuntimeContext的初始化;就是为了能够在jsp所转换的 java 文件里的 javax.servlet.jsp.JspFactory.getDefaultFactory() 这行能够有返回值
         JspC c = new JspC();
         new JspRuntimeContext(servletContext, c);

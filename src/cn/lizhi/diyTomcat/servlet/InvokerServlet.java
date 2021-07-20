@@ -37,8 +37,8 @@ public class InvokerServlet extends HttpServlet {
 
         try {
             Class<?> servletClass = context.getWebappClassLoader().loadClass(servletClassName); // 获取该class对象；后续根据这个类对象，实例化出servlet对象出来 context对应的classLoader进行加载该类 再由Service交给对应的servlet进行处理;同一个类加载器
-            System.out.println(servletClass.getClassLoader());
-            System.out.println(servletClass);
+//            System.out.println(servletClass.getClassLoader());
+//            System.out.println(servletClass);
             Object servletObject = context.getServlet(servletClass); // 负责从context中获取其对应的servlet对象
             ReflectUtil.invoke(servletObject, "service", request, response); // 执行方法 Reflect 反射执行
             if (response.getRedirectPath() != null) { // 是否存在跳转地址

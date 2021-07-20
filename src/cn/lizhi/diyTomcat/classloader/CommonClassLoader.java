@@ -16,6 +16,7 @@ public class CommonClassLoader extends URLClassLoader {
             File workingFolder = new File(System.getProperty("user.dir")); // 当前项目目录
             File libFolder = new File(workingFolder, "lib");// 定位到lib文件夹
             File[] jarFiles = libFolder.listFiles();
+            assert jarFiles != null;
             for (File file : jarFiles) {
                 if (file.getName().endsWith("jar")) { //  扫描 lib 目录下的jar, 然后通过 addURL 加到当前的库里面去
                     URL url = new URL("file:" + file.getAbsolutePath());

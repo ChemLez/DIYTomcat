@@ -91,13 +91,11 @@ public class SessionManager {
         // cookie进行初始化
         cookie.setMaxAge(session.getMaxInactiveInterval()); // 设置cookie持久化的时间
         cookie.setPath(request.getContext().getPath()); // path - 访问的资源路径目录 ，虚拟目录
-
         response.addCookie(cookie); // 将cookie进行客户端响应，以后客户端上的这个cookie可以用来对应到服务端的cookie
     }
 
     /**
      * 创建session
-     *
      * @param request
      * @param response
      * @return
@@ -110,7 +108,6 @@ public class SessionManager {
         session.setMaxInactiveInterval(defaultTimeout); // 设定最大的间隔时间
         session.setLastAccessedTime(System.currentTimeMillis()); // 当创建的时候，最后一次使用时间，就是创建时间
         sessionMap.put(sId, session); // 将新创建的session存放咋map中
-
         createCookieBySession(session, request, response); // 创建对应的cookie
         return session;
     }
